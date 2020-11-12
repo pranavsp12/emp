@@ -3,4 +3,23 @@
   <groupId>com.tcs.employee</groupId>
   <artifactId>employee</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <properties>
+  	<maven.compiler.target>1.8</maven.compiler.target>
+  	<maven.comiler.source>1.8</maven.comiler.source>
+  </properties>
+  <dependencies>
+  <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+    	<groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    	<version>8.0.15</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+	<dependency>
+   		<groupId>org.projectlombok</groupId>
+    	<artifactId>lombok</artifactId>
+    	<version>1.18.16</version>
+    	<scope>provided</scope>
+	</dependency>
+  </dependencies>
 </project>
