@@ -13,6 +13,6 @@ public class Department {
     private long id;
     private long organizationId;
     private String name;
-    private List<Employee> employees;
+    private String employees;
 
 }

@@ -8,38 +8,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.tcs.employee.model.Employee;
 import com.tcs.employee.util.DBUtils;
 
+@Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
 	
-	private EmployeeDAOImpl() {
-		
-	}
-	private static EmployeeDAO dao;
-	 	
-	public static EmployeeDAO getInstance() {
-		if(dao==null) {
-			dao = new EmployeeDAOImpl();
-			System.out.println("inside the if condition");
-			return dao;
-		}
-		return dao;
-		
-	}
+	@Autowired
+	DBUtils dbUtils;
+	
 	
 	public String createEmployee(Employee employee) {
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		int result = 0;
-		String insertProduct = "insert into Employee (id,organizationId,departmentId,name,age,position) values(?,?,?,?,?,?)";
+		String insertEmployee = "insert into EMPLOYEE (id,departmentId,organizationId,name,age,position) values(?,?,?,?,?,?)";
 		try {
-			 preparedStatement = connection.prepareStatement(insertProduct);
-			 preparedStatement.setInt(1, employee.getId());
-			 preparedStatement.setInt(2, employee.getOrganizationId());
-			 preparedStatement.setInt(3, employee.getDepartmentId());
+			 preparedStatement = connection.prepareStatement(insertEmployee);
+			 preparedStatement.setLong(1, employee.getId());
+			 preparedStatement.setLong(3, employee.getOrganizationId());
+			 preparedStatement.setLong(2, employee.getDepartmentId());
 			 preparedStatement.setString(4, employee.getName());
-			 preparedStatement.setFloat(5, employee.getAge());
+			 preparedStatement.setInt(5, employee.getAge());
 			 preparedStatement.setString(6, employee.getPosition());
 			 
 			 result = preparedStatement.executeUpdate();
@@ -65,7 +58,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			return "fail";
 		}
 		finally {
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}	
 	}
 	
@@ -75,12 +68,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 	
 	public String deleteEmployee(int id) {
+		// TODO Auto-generated method stub
 		return null;
 	}	
 
 	public Optional<Employee> getEmployeeById(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
@@ -94,9 +88,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			 
 			if(resultSet.next()) {
 				employee = new Employee();
-				employee.setId(resultSet.getInt("id"));
-				employee.setOrganizationId(resultSet.getInt("organizationId"));
-				employee.setDepartmentId(resultSet.getInt("departmentId"));
+				employee.setId(resultSet.getLong("id"));
+				employee.setOrganizationId(resultSet.getLong("organizationId"));
+				employee.setDepartmentId(resultSet.getLong("departmentId"));
 				employee.setName(resultSet.getString("name"));
 				employee.setAge(resultSet.getInt("age"));
 				employee.setPosition(resultSet.getString("position"));
@@ -115,19 +109,21 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			return Optional.empty();
 		}
 		finally {
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 		return Optional.of(employee);
 	}
 	
 	public Optional<List<Employee>> getEmployee() {
+		// TODO Auto-generated method stub
 		return null;
 		
 	}
 		
-	public Optional<List<Employee>> findByOrganizationId(int id) {
+	public Optional<List<Employee>> findByOrganizationId(int organizationId) {
 		// TODO Auto-generated method stub
 		return null;
+		
 	}
 
 	

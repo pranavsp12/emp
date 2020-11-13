@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Employee {
+public class Employee{ 
 	
-    private int id;
-    private int organizationId;
-    private int departmentId;
+    private long id;
+    private long organizationId;
+    private long departmentId;
     private String name;
     private int age;
     private String position;

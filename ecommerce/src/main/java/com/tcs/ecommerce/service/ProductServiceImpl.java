@@ -2,28 +2,17 @@ package com.tcs.ecommerce.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.tcs.ecommerce.dao.ProductDAO;
-import com.tcs.ecommerce.dao.ProductDAOImpl;
 import com.tcs.ecommerce.model.Product;
 
+@Service
 public class ProductServiceImpl implements ProductService{
-		private static ProductService dao;
-
-		private ProductServiceImpl() {
-			// TODO Auto-generated constructor stub
-		}
-		public static ProductService getInstance() {
-			
-			if(dao==null) {
-				dao = new ProductServiceImpl();
-				System.out.println("inside the if condition");
-				return dao;
-			}
-			return dao;
-			
-			
-		}
-		ProductDAO productDao = ProductDAOImpl.getInstance();
+		
+	@Autowired
+		private ProductDAO productDao;
 		
 		public String createProduct(Product product) {
 			// TODO Auto-generated method stub

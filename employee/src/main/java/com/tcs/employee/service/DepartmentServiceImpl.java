@@ -6,47 +6,44 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tcs.employee.DAO.DepartmentDAO;
 import com.tcs.employee.DAO.EmployeeDAO;
-import com.tcs.employee.model.Employee;
+import com.tcs.employee.model.Department;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class DepartmentServiceImpl implements DepartmentService {
 	
 	@Autowired
-	private EmployeeDAO employeeDao;
+	private DepartmentDAO departmentDao;
 
-	public String createEmployee(Employee employee) {
+	public String createDepartment(Department department) {
 		// TODO Auto-generated method stub
-		
-		return employeeDao.createEmployee(employee);
+		return departmentDao.createDepartment(department);
 	}
 
-	public String updateEmployee(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String deleteEmployee(long id) {
+	public String updateDepartment(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Optional<Employee> findById(long id) {
+	public String deleteDepartment(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Optional<List<Employee>> getEmployees() {
+	public Optional<Department> findById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Optional<List<Employee>> findByOrganizationId(long id) {
+	public Optional<List<Department>> getDepartment() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
-	
-	
+	public Optional<List<Department>> findByOrganizationId(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

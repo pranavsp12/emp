@@ -3,30 +3,33 @@ package com.tcs.ecommerce.dao;
 import java.sql.*;
 import java.util.*;
 
-import com.tcs.ecommerce.model.Product;
-import com.tcs.ecommerce.util.DBUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import com.tcs.ecommerce.model.Product;
+import com.tcs.ecommerce.utils.DBUtils;
+
+@Repository
 public class ProductDAOImpl implements ProductDAO {
 	
-	private ProductDAOImpl() {
-		
-	}
-	private static ProductDAO dao;
+	@Autowired 
+	DBUtils dbUtils;
 	
-	public static ProductDAO getInstance() {
-		
-		if(dao==null) {
-			dao = new ProductDAOImpl();
-			System.out.println("inside the if condition");
-			return dao;
-		}
-		return dao;
-	}
-	
+	/*
+	 * private ProductDAOImpl() {
+	 * 
+	 * } private static ProductDAO dao;
+	 * 
+	 * public static ProductDAO getInstance() {
+	 * 
+	 * if(dao==null) { dao = new ProductDAOImpl();
+	 * System.out.println("inside the if condition"); return dao; 
+	 * }
+	 * return dao;
+	 * }
+	 */	
 	public String createProduct(Product product) {
-		// TODO Auto-generated method stub
-	
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 		String insertProduct = "insert into PRODUCT (productid,productname,description,category,price) values(?,?,?,?,?)";
@@ -61,13 +64,13 @@ public class ProductDAOImpl implements ProductDAO {
 			return "fail";
 		}
 		finally {
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}	
 	}
 
 	public Optional<Product> getProductById(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
@@ -102,7 +105,7 @@ public class ProductDAOImpl implements ProductDAO {
 			return Optional.empty();
 		}
 		finally {
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 		return Optional.of(product);
 	}
